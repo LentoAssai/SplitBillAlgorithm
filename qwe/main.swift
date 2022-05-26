@@ -56,6 +56,8 @@ print("총 딕셔너리 : ", myDictionary)
 
 var givers: [String : Int] = myDictionary.filter { $0.value < 0 }
 
+
+// givers의 value가 음수이므로 양수로 바꾸기
 for key in givers.keys {
     givers[key]! *= -1
 }
@@ -75,10 +77,11 @@ print("정렬 takers : ", sortedTakers)
 
 // Giver Taker 분류 완료
 
-
-
-
-
+// ------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------
 
 // 송금
 
@@ -91,38 +94,28 @@ let takerIndex = 0
 while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
     print(numOfSending + 1, "번째입니다.")
     
+    print("giver number : \(sortedGivers.count)")
+    print("taker number : \(sortedTakers.count)")
     
-    
-    // 같은거 있는지 확인
-    var flag: Bool = false
+    // 같은거 있는지 확인 후 처리 (완전 탐색 말고 다른거 없나?)
     
     for i in 0..<sortedGivers.count {
         for j in 0..<sortedTakers.count {
             if sortedGivers[i].value == sortedTakers[j].value {
-                flag = true
+                
+                print("\(sortedGivers[i].key)가 \(sortedTakers[j].key)에게 \(sortedGivers[i].value)원을 주었습니다.")
+                
+                numOfSending += 1
+                sortedGivers.remove(at: i)
+                sortedTakers.remove(at: j)
+                
+                continue
+                // 여기서 continue하니까 안쪽 for문으로 가는듯
+                // 제일 바깥 while 조건문으로 가야 되는데... 어떡하지??
+                
             }
         }
     }
-    
-    // 같은거 있으면 처리
-    if flag {
-        for i in 0..<sortedGivers.count {
-            for j in 0..<sortedTakers.count {
-                if sortedGivers[i].value == sortedTakers[j].value {
-                    
-                    
-                    print("\(sortedGivers[i].key)가 \(sortedTakers[j].key)에게 \(sortedGivers[i].value)원을 주었습니다.")
-                    numOfSending += 1
-                    sortedGivers.remove(at: i)
-                    sortedTakers.remove(at: j)
-                    
-                }
-            }
-        }
-        
-        continue
-    }
-    
     
     
     
@@ -146,8 +139,9 @@ while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
     let givingMoney = sortedGivers[giverIndex].value
     let takingMoney = sortedTakers[takerIndex].value
     
-//    print("GiverIndex : \(giverIndex)")
+    //    print("GiverIndex : \(giverIndex)")
     print("givingMoney : ", givingMoney, "takingMoney : ", takingMoney)
+    
     
     
     
@@ -175,4 +169,4 @@ while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
 
 print()
 print("총 송금 횟수 : ", numOfSending)
- 
+
