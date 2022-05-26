@@ -20,10 +20,10 @@ for i in 1...n {
     
     
     // 정산자가 딕셔너리에 없는 경우 예외 처리
-
+    
     
     print("\(i)차 참가자 이름 입력")
-    for _ in 0..<numOfPerson - 1 {
+    for _ in 0..<numOfPerson {
         
         let name = readLine()!
         if let curPrice = myDictionary[name] {
@@ -71,6 +71,7 @@ print("그냥 takers : ", takers)
 var sortedGivers = givers.sorted { $0.value > $1.value } // value의 절댓값이 큰 순서로 정렬
 var sortedTakers = takers.sorted { $0.value > $1.value } // value의 절댓값이 큰 순서로 정렬
 
+
 print("정렬 givers : ", sortedGivers)
 print("정렬 takers : ", sortedTakers)
 
@@ -87,51 +88,149 @@ print("정렬 takers : ", sortedTakers)
 
 // 절댓값이 같은 경우 먼저 처리하기
 
-let numOfGivers = sortedGivers.count
-let numOfTakers = sortedTakers.count
-
 var numOfSending = 0
 
 
-for i in 0..<numOfGivers {
-    for j in 0..<numOfTakers {
-        if sortedGivers[i].value == sortedTakers[j].value {
-            
-            numOfSending += 1
-            sortedGivers.remove(at: i)
-            sortedTakers.remove(at: j)
-            
-        }
-    }
-}
 
+// Giver, Taker 같은거 찾는 로직
+
+//func removeSameBill(sortedGivers: inout [String : Int], sortedTakers: inout [String : Int]) -> Int {
+//    var count = 0
+//
+//    for key1 in sortedGivers.keys{
+//        for key2 in sortedTakers.keys {
+//            if sortedGivers[key1] == sortedTakers[key2] {
+//                count += 1
+//                sortedGivers.removeValue(forKey: key1)
+//                sortedTakers.removeValue(forKey: key2)
+//            }
+//        }
+//    }
+//
+//    return count
+//}
+
+
+// 같은거 제거하는 로직
+//for i in 0..<numOfGivers {
+//    for j in 0..<numOfTakers {
+//        if sortedGivers[i].value == sortedTakers[j].value {
+//
+//            numOfSending += 1
+//            sortedGivers.remove(at: i)
+//            sortedTakers.remove(at: j)
+//
+//        }
+//    }
+//}
+
+
+var giverIndex = 0
+let takerIndex = 0
 
 while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
     print(numOfSending + 1, "번째입니다.")
-    let givingMoney = sortedGivers.first!.value // while문으로 nil이 아니라는 조건을 확인하였으므로 강제 언래핑
-    let takingMoney = sortedTakers.first!.value
     
-    print("givingMoney : ", givingMoney, "takingMoney : ", takingMoney)
-
-    if givingMoney < takingMoney {
-        sortedTakers[0].value -= givingMoney
-
-        print("\(sortedGivers[0].key)가 \(sortedTakers[0].key)에게 \(givingMoney)원을 주었습니다.")
-
-        sortedGivers.removeFirst()
-    } else {
-        sortedGivers[0].value -= takingMoney
-        
-        print("\(sortedGivers[0].key)가 \(sortedTakers[0].key)에게 \(takingMoney)원을 주었습니다.")
-
-        sortedTakers.removeFirst()
+    
+    
+    // 같은거 있는지 확인
+    var flag: Bool = false
+    
+    for i in 0..<sortedGivers.count {
+        for j in 0..<sortedTakers.count {
+            if sortedGivers[i].value == sortedTakers[j].value {
+                flag = true
+            }
+        }
     }
     
+    // 같은거 있으면 처리
+    if flag {
+        for i in 0..<sortedGivers.count {
+            for j in 0..<sortedTakers.count {
+                if sortedGivers[i].value == sortedTakers[j].value {
+                    
+                    
+                    print("\(sortedGivers[i].key)가 \(sortedTakers[j].key)에게 \(sortedGivers[i].value)원을 주었습니다.")
+                    numOfSending += 1
+                    sortedGivers.remove(at: i)
+                    sortedTakers.remove(at: j)
+                    
+                }
+            }
+        }
+        
+        continue
+    }
+    
+    
+    
+    
+    giverIndex = 0
+    
+    // Taker < Giver 이면 다음 Giver로 넘어가기
+    
+    while sortedGivers[giverIndex].value > sortedTakers[takerIndex].value {
+        
+        if giverIndex >= sortedGivers.count - 1 {
+            giverIndex = 0
+            break
+        }
+        
+        giverIndex += 1
+        
+    }
+    
+    
+//    if giverIndex < sortedGivers.count {
+//        print("good",sortedGivers)
+//        while sortedGivers[giverIndex].value > sortedTakers[takerIndex].value {
+//
+//            //        print("giver money : \(sortedGivers[giverIndex].value)")
+//            //        print("taker money : \(sortedTakers[takerIndex].value)")
+//
+//            if giverIndex >= sortedGivers.count {
+//                giverIndex = 0
+//                break
+//            }
+//
+//            giverIndex += 1
+//
+//        }
+//    }
+    
+    
+    
+    let givingMoney = sortedGivers[giverIndex].value
+    let takingMoney = sortedTakers[takerIndex].value
+    
+    print("GiverIndex : \(giverIndex)")
+    print("givingMoney : ", givingMoney, "takingMoney : ", takingMoney)
+    
+    
+    
+    if givingMoney < takingMoney {
+        
+        sortedTakers[takerIndex].value -= givingMoney
+        print("\(sortedGivers[giverIndex].key)가 \(sortedTakers[takerIndex].key)에게 \(givingMoney)원을 주었습니다.")
+        
+        sortedGivers.remove(at: giverIndex)
+        
+        
+    } else {
+        // 끝까지 갔는데 없어서 맨 위로 돌아온 경우
+        sortedGivers[giverIndex].value -= takingMoney
+        print("\(sortedGivers[giverIndex].key)가 \(sortedTakers[takerIndex].key)에게 \(takingMoney)원을 주었습니다.")
+        
+        sortedTakers.remove(at: takerIndex)
+        
+    }
     numOfSending += 1
     
     print()
 }
 
 
-
+print()
 print("총 송금 횟수 : ", numOfSending)
+ 
