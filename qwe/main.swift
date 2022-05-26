@@ -19,8 +19,7 @@ for i in 1...n {
     let leader = readLine()!
     
     
-    // 정산자가 딕셔너리에 없는 경우 예외 처리
-    
+    // 정산자가 딕셔너리에 없는 경우 예외 처리 추가하기
     
     print("\(i)차 참가자 이름 입력")
     for _ in 0..<numOfPerson {
@@ -55,7 +54,6 @@ print("총 딕셔너리 : ", myDictionary)
 
 
 
-// 0원으로 딱 떨어지는 경우 아예 빼버리기
 var givers: [String : Int] = myDictionary.filter { $0.value < 0 }
 
 for key in givers.keys {
@@ -75,8 +73,6 @@ var sortedTakers = takers.sorted { $0.value > $1.value } // value의 절댓값�
 print("정렬 givers : ", sortedGivers)
 print("정렬 takers : ", sortedTakers)
 
-
-
 // Giver Taker 분류 완료
 
 
@@ -86,43 +82,7 @@ print("정렬 takers : ", sortedTakers)
 
 // 송금
 
-// 절댓값이 같은 경우 먼저 처리하기
-
 var numOfSending = 0
-
-
-
-// Giver, Taker 같은거 찾는 로직
-
-//func removeSameBill(sortedGivers: inout [String : Int], sortedTakers: inout [String : Int]) -> Int {
-//    var count = 0
-//
-//    for key1 in sortedGivers.keys{
-//        for key2 in sortedTakers.keys {
-//            if sortedGivers[key1] == sortedTakers[key2] {
-//                count += 1
-//                sortedGivers.removeValue(forKey: key1)
-//                sortedTakers.removeValue(forKey: key2)
-//            }
-//        }
-//    }
-//
-//    return count
-//}
-
-
-// 같은거 제거하는 로직
-//for i in 0..<numOfGivers {
-//    for j in 0..<numOfTakers {
-//        if sortedGivers[i].value == sortedTakers[j].value {
-//
-//            numOfSending += 1
-//            sortedGivers.remove(at: i)
-//            sortedTakers.remove(at: j)
-//
-//        }
-//    }
-//}
 
 
 var giverIndex = 0
@@ -168,8 +128,9 @@ while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
     
     giverIndex = 0
     
-    // Taker < Giver 이면 다음 Giver로 넘어가기
     
+    
+    // Taker < Giver 이면 다음 Giver로 넘어가기
     while sortedGivers[giverIndex].value > sortedTakers[takerIndex].value {
         
         if giverIndex >= sortedGivers.count - 1 {
@@ -182,29 +143,10 @@ while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
     }
     
     
-//    if giverIndex < sortedGivers.count {
-//        print("good",sortedGivers)
-//        while sortedGivers[giverIndex].value > sortedTakers[takerIndex].value {
-//
-//            //        print("giver money : \(sortedGivers[giverIndex].value)")
-//            //        print("taker money : \(sortedTakers[takerIndex].value)")
-//
-//            if giverIndex >= sortedGivers.count {
-//                giverIndex = 0
-//                break
-//            }
-//
-//            giverIndex += 1
-//
-//        }
-//    }
-    
-    
-    
     let givingMoney = sortedGivers[giverIndex].value
     let takingMoney = sortedTakers[takerIndex].value
     
-    print("GiverIndex : \(giverIndex)")
+//    print("GiverIndex : \(giverIndex)")
     print("givingMoney : ", givingMoney, "takingMoney : ", takingMoney)
     
     
