@@ -91,7 +91,7 @@ var numOfSending = 0
 var giverIndex = 0
 let takerIndex = 0
 
-while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
+mainLoop: while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
     print(numOfSending + 1, "번째입니다.")
     
     print("giver number : \(sortedGivers.count)")
@@ -109,10 +109,7 @@ while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
                 sortedGivers.remove(at: i)
                 sortedTakers.remove(at: j)
                 
-                continue
-                // 여기서 continue하니까 안쪽 for문으로 가는듯
-                // 제일 바깥 while 조건문으로 가야 되는데... 어떡하지??
-                
+                continue mainLoop
             }
         }
     }
@@ -139,7 +136,6 @@ while(!(sortedGivers.isEmpty || sortedTakers.isEmpty)) {
     let givingMoney = sortedGivers[giverIndex].value
     let takingMoney = sortedTakers[takerIndex].value
     
-    //    print("GiverIndex : \(giverIndex)")
     print("givingMoney : ", givingMoney, "takingMoney : ", takingMoney)
     
     
