@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2C0CB683283DC8C40001AA29 /* amain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CB682283DC8C40001AA29 /* amain.swift */; };
-		2C0CB68A283E08DF0001AA29 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CB689283E08DF0001AA29 /* main.swift */; };
+		2C0CB68A283E08DF0001AA29 /* algo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CB689283E08DF0001AA29 /* algo.swift */; };
+		2C63ACF62840659700475CAE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63ACF52840659700475CAE /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,7 +27,8 @@
 /* Begin PBXFileReference section */
 		2C0CB67F283DC8C40001AA29 /* qwe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qwe; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C0CB682283DC8C40001AA29 /* amain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = amain.swift; sourceTree = "<group>"; };
-		2C0CB689283E08DF0001AA29 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2C0CB689283E08DF0001AA29 /* algo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = algo.swift; sourceTree = "<group>"; };
+		2C63ACF52840659700475CAE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				2C0CB682283DC8C40001AA29 /* amain.swift */,
-				2C0CB689283E08DF0001AA29 /* main.swift */,
+				2C0CB689283E08DF0001AA29 /* algo.swift */,
+				2C63ACF52840659700475CAE /* main.swift */,
 			);
 			path = qwe;
 			sourceTree = "<group>";
@@ -124,7 +127,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C0CB683283DC8C40001AA29 /* amain.swift in Sources */,
-				2C0CB68A283E08DF0001AA29 /* main.swift in Sources */,
+				2C0CB68A283E08DF0001AA29 /* algo.swift in Sources */,
+				2C63ACF62840659700475CAE /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
